@@ -16,38 +16,25 @@
     * { box-sizing: border-box; }
 
     /* ==========================================
-       ⭐ 整體頂部：淺色背景區
+       ⭐ 上方淺底色區
     ========================================== */
     .top-bg {
       width: 100%;
-      background: #E9DFD7;       /* 淺背景 */
-      padding: 60px 0 40px 0;    /* 高度感 */
+      background: #E9DFD7;      /* 淺底色 */
+      padding: 60px 0 40px 0;
+      text-align: center;
     }
 
     /* ==========================================
-       ⭐ 白色框框：放標題 + tabs
-    ========================================== */
-    .header-box {
-      width: 90%;
-      max-width: 1000px;
-      margin: auto;
-      background: #ffffff;
-      border-radius: 28px;
-      padding: 40px 20px 30px 20px;
-      box-shadow: 0 6px 25px rgba(0,0,0,0.08);
-    }
-
-    /* ==========================================
-       ⭐ 標題色塊
+       ⭐ 標題色塊（保留）
     ========================================== */
     .title-bar {
-      width: 100%;
-      background: #B89A84;    /* 深奶茶色區塊 */
-      padding: 20px;
+      display: inline-block;
+      background: #B89A84;
+      padding: 20px 40px;
       border-radius: 18px;
-      text-align: center;
-      margin-bottom: 24px;
       color: white;
+      margin-bottom: 24px;
     }
 
     .title-bar h1 {
@@ -58,9 +45,10 @@
     }
 
     /* ==========================================
-       ⭐ Tabs （保留原本樣式，只調整位置）
+       ⭐ Tabs （保留你的原始樣式）
     ========================================== */
     .nav-content {
+      margin-top: 20px;
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
@@ -154,28 +142,21 @@
 
 <body>
 
-  <!-- =========================== -->
-  <!-- ⭐ 頂部：淺底色 + 白框 + 標題 + tabs -->
-  <!-- =========================== -->
+  <!-- ⭐ 淺底色 + 標題色塊 + Tabs（白框已移除） -->
   <div class="top-bg">
-    <div class="header-box">
 
-      <!-- 標題色塊 -->
-      <div class="title-bar">
-        <h1>常見問題 Q&A</h1>
-      </div>
-
-      <!-- Tabs（原版內容不動） -->
-      <div class="nav-content">
-        <button class="nav-item active" data-tab="tab1">📅 預約試穿</button>
-        <button class="nav-item" data-tab="tab2">👥 選擇人數與試穿方式</button>
-        <button class="nav-item" data-tab="tab3">👗 礼服租借</button>
-        <button class="nav-item" data-tab="tab4">📸 拍攝服務</button>
-      </div>
-
+    <div class="title-bar">
+      <h1>常見問題 Q&A</h1>
     </div>
-  </div>
 
+    <div class="nav-content">
+      <button class="nav-item active" data-tab="tab1">📅 預約試穿</button>
+      <button class="nav-item" data-tab="tab2">👥 選擇人數與試穿方式</button>
+      <button class="nav-item" data-tab="tab3">👗 禮服租借</button>
+      <button class="nav-item" data-tab="tab4">📸 拍攝服務</button>
+    </div>
+
+  </div>
   <!-- =========================== -->
   <!-- ⭐ 下面全部 QA（完全沒動） -->
   <!-- =========================== -->
