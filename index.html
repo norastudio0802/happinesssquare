@@ -17,53 +17,51 @@
     * { box-sizing: border-box; }
 
     /* ======================================================
-       ⭐ 一模一樣截圖風格的：奶茶霧面 + 白色半透明內框
+       ⭐ 桌機版：依照手機截圖風格改成更平衡的 Header
        ====================================================== */
     .navbar {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
+      padding: 32px 0 10px 0;   /* ⭐ 桌機適中高度，不會太高 */
       background: linear-gradient(
         180deg,
         #d8c5b7 0%,
-        #c4ad9c 45%,
-        #b89f8a 100%
+        #c9b3a4 40%,
+        #bba493 100%
       );
-      backdrop-filter: blur(14px);
-      box-shadow: 0 4px 30px rgba(120, 98, 78, 0.25);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 4px 25px rgba(120, 98, 78, 0.25);
       z-index: 1000;
-      padding: 0;
-      border-radius: 0 0 32px 32px;
+      border-radius: 0 0 28px 28px; /* ⭐ 微弧度，不誇張 */
     }
 
+    /* ⭐ 白色內框縮窄，桌機更好看 */
     .title-header {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 40px 24px 22px 24px;
+      max-width: 760px;          /* ⭐ 不要全寬，集中視覺 */
+      margin: 0 auto 10px auto;
+      padding: 22px 24px 14px 24px;
       text-align: center;
 
-      /* 白色半透明卡片感（模仿截圖） */
-      background: rgba(255,255,255,0.28);
+      background: rgba(255,255,255,0.32); /* ⭐ 半透明霧面 */
       backdrop-filter: blur(8px);
-      border-radius: 32px 32px 0 0;
-      box-shadow: 0 6px 20px rgba(255,255,255,0.35) inset;
+      border-radius: 24px;
+      box-shadow: 0 4px 14px rgba(255,255,255,0.25) inset;
     }
 
-    /* 標題改為截圖中的白色 */
     .page-title {
-      font-size: 32px;
+      font-size: 30px;
       font-weight: 800;
       color: #ffffff;
       margin: 0;
-      letter-spacing: 4px;
+      letter-spacing: 3px;
       text-shadow: 0 0 6px rgba(0,0,0,0.15);
     }
 
     /* ======================================================
-       ⭐ 以下全部保留你的原始碼（完全不動）
+       ⭐ Tabs：保持你原本版本，不動
        ====================================================== */
-
     .nav-content {
       max-width: 1200px;
       margin: 0 auto;
@@ -72,7 +70,7 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      padding: 0 24px 20px 24px;
+      padding: 0 24px 12px 24px;
     }
 
     .nav-item {
@@ -100,6 +98,9 @@
       box-shadow: 0 4px 12px rgba(160,130,109,0.4);
     }
 
+    /* ======================================================
+       ⭐ 你的原始版面（不動）
+       ====================================================== */
     .main-app-container {
       width: 100%;
       padding-bottom: 60px;
@@ -122,7 +123,6 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* QA 卡片 */
     .qa-card {
       background: #fff;
       border-radius: 24px;
@@ -175,15 +175,13 @@
     .card-content li .emoji { font-size: 22px; margin-right: 8px; vertical-align: middle; }
 
     @media (max-width: 768px) {
-      .title-header { padding: 20px 16px 12px 16px; }
-      .nav-content { padding: 0 16px 16px 16px; gap: 6px; }
-      .nav-item { padding: 10px 16px; font-size: 13px; }
-      .page-title { font-size: 24px; letter-spacing: 2px; }
-      .content-wrapper { padding: 200px 16px 48px 16px; }
-      .qa-card { padding: 24px; }
-      .card-title { font-size: 20px; }
-      .card-content li { font-size: 15px; }
-      .card-content li .emoji { font-size: 20px; }
+      .title-header {
+        max-width: 90%;
+        padding: 22px 16px;
+      }
+      .page-title {
+        font-size: 24px;
+      }
     }
   </style>
 </head>
@@ -193,6 +191,7 @@
     <div class="title-header">
       <h1 class="page-title">常見問題 Q&amp;A</h1>
     </div>
+
     <div class="nav-content">
       <button class="nav-item active" data-tab="tab1">📅 預約試穿</button>
       <button class="nav-item" data-tab="tab2">👥 選擇人數與試穿方式</button>
@@ -201,99 +200,213 @@
     </div>
   </nav>
 
+  <!-- Main Content -->
   <div class="main-app-container">
     <div class="content-wrapper">
 
-      <!-- Tab 1 -->
+      <!-- Tab 1: 預約試穿 -->
       <div class="tab-content active" id="tab1">
         <div class="qa-card">
-          <div class="card-header"><h2 class="card-title">📅 需要提前預約嗎？</h2></div>
-          <div class="card-content">
-            <ul><li>✅ 是的，我們採「完全預約制」。建議提前安排試穿時段。</li></ul>
+          <div class="card-header">
+            <h2 class="card-title"><span>📅</span>需要提前預約嗎？</h2>
           </div>
-        </div>
-
-        <div class="qa-card">
-          <div class="card-header"><h2 class="card-title">👗 初次試穿可以選幾套？</h2></div>
-          <div class="card-content">
-            <ul><li>✅ 首次提供免費試穿 2 套，時間約 1 小時。若超出將酌收費用。</li></ul>
-          </div>
-        </div>
-
-        <div class="qa-card">
-          <div class="card-header"><h2 class="card-title">💍 包套新人可以先體驗試穿嗎？</h2></div>
           <div class="card-content">
             <ul>
-              <li>✅ 需先完成拍攝溝通才提供試穿，以確保禮服最佳使用狀態。</li>
+              <li><span class="emoji">✅</span>是的，我們採「完全預約制」。建議您提前預約，以確保能安排到最適合的試穿時段。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="qa-card">
+          <div class="card-header">
+            <h2 class="card-title"><span>👗</span>初次試穿可以選幾套？</h2>
+          </div>
+          <div class="card-content">
+            <ul>
+              <li><span class="emoji">✅</span>單租首次到店，我們提供免費試穿 2 套、體驗時長約 1 小時。如未租借且超出件數或時間，將酌收服務費。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="qa-card">
+          <div class="card-header">
+            <h2 class="card-title"><span>💍</span>婚紗包套新人可以先體驗試穿嗎？</h2>
+          </div>
+          <div class="card-content">
+            <ul>
+              <li><span class="emoji">✅</span>婚紗拍攝方案的新人：在未下訂、未與攝影師進行拍攝風格溝通前，暫無提供「提前體驗試穿」。</li>
+              <li>我們希望每件禮服在最好的狀態，提供給已確認拍攝流程的新人使用。</li>
             </ul>
           </div>
         </div>
       </div>
 
-      <!-- Tab 2 -->
+      <!-- Tab 2: 選擇人數與試穿方式 -->
       <div class="tab-content" id="tab2">
         <div class="qa-card">
-          <div class="card-header"><h2 class="card-title">👥 可以帶幾位親友？</h2></div>
+          <div class="card-header">
+            <h2 class="card-title"><span>👥</span>挑選禮服可以帶幾位親友？</h2>
+          </div>
           <div class="card-content">
-            <ul><li>✅ 建議 1–2 位親友同行，最多包含新人 4 位。</li></ul>
+            <ul>
+              <li><span class="emoji">✅</span>因空間動線考量，包含新人最多 4 位入店。建議帶 1–2 位最了解您風格、能給予協助的親友，能讓挑選過程更順暢。</li>
+            </ul>
           </div>
         </div>
 
         <div class="qa-card">
-          <div class="card-header"><h2 class="card-title">⏰ 試穿有時間限制嗎？</h2></div>
+          <div class="card-header">
+            <h2 class="card-title"><span>⏰</span>挑禮限制時間與件數嗎？</h2>
+          </div>
           <div class="card-content">
-            <ul><li>✅ 一般為 1–2 小時，可依需求調整。</li></ul>
+            <ul>
+              <li><span class="emoji">✅</span>試穿時間以 1–2 小時為主，依您想租的套數彈性調整。建議先了解自己喜歡的風格，縮小範圍會挑得更順利。</li>
+            </ul>
           </div>
         </div>
       </div>
 
-      <!-- Tab 3 -->
+      <!-- Tab 3: 禮服租借 -->
       <div class="tab-content" id="tab3">
         <div class="qa-card">
-          <div class="card-header"><h2 class="card-title">💰 押金只能用現金嗎？</h2></div>
-          <div class="card-content"><ul><li>✅ 可現金或轉帳（轉帳退款需付 15 元手續費）。</li></ul></div>
+          <div class="card-header">
+            <h2 class="card-title"><span>💰</span>押金只能用現金嗎？</h2>
+          </div>
+          <div class="card-content">
+            <ul>
+              <li><span class="emoji">✅</span>可使用現金或線上轉帳。若以轉帳方式退款，銀行會收 15 元手續費。若希望無手續費，建議以現金支付押金。含清洗與保養費用。</li>
+            </ul>
+          </div>
         </div>
 
         <div class="qa-card">
-          <div class="card-header"><h2 class="card-title">👰 修改尺寸嗎？</h2></div>
-          <div class="card-content"><ul><li>✅ 可依身形專業微調。</li></ul></div>
+          <div class="card-header">
+            <h2 class="card-title"><span>👰🏻‍♀️</span>禮服尺寸可以修改嗎？</h2>
+          </div>
+          <div class="card-content">
+            <ul>
+              <li><span class="emoji">✅</span>可以的，我們有專業修改服務。會依照您的身形微調至最適合的合身度。</li>
+            </ul>
+          </div>
         </div>
 
         <div class="qa-card">
-          <div class="card-header"><h2 class="card-title">📅 租期多長？</h2></div>
-          <div class="card-content"><ul><li>✅ 3 天 2 夜，特殊需求可延長。</li></ul></div>
+          <div class="card-header">
+            <h2 class="card-title"><span>📅</span>租期多長？</h2>
+          </div>
+          <div class="card-content">
+            <ul>
+              <li><span class="emoji">✅</span>一般租期為 3 天 2 夜。跨縣市、外縣市或特殊需求可安排 4 天 3 夜。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="qa-card">
+          <div class="card-header">
+            <h2 class="card-title"><span>👗</span>媽媽、伴娘、花童可以租一般禮服嗎？</h2>
+          </div>
+          <div class="card-content">
+            <ul>
+              <li><span class="emoji">✅</span>建議以專用款式為主（媽媽禮服／伴娘服／花童服）。因一般禮服多數有拖尾，活動上較不便利。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="qa-card">
+          <div class="card-header">
+            <h2 class="card-title"><span>👛</span>禮服有提供披肩或配件嗎？</h2>
+          </div>
+          <div class="card-content">
+            <ul>
+              <li><span class="emoji">✅</span>禮服有基本披肩可借用。若希望拍照更自然，建議自備氣質圍巾或披肩（不會過於蓬厚）。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="qa-card">
+          <div class="card-header">
+            <h2 class="card-title"><span>🧤</span>手套 / New Bra 有提供嗎？</h2>
+          </div>
+          <div class="card-content">
+            <ul>
+              <li><span class="emoji">✅</span>手套目前無租借。</li>
+              <li>工作室有販售New Bra，「新人及造型師大大推薦好用」，可以直接現場購買喔。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="qa-card">
+          <div class="card-header">
+            <h2 class="card-title"><span>⌛</span>取禮服會花很多時間嗎？</h2>
+          </div>
+          <div class="card-content">
+            <ul>
+              <li><span class="emoji">✅</span>若只是領取禮服：約 15 分鐘。若需當天「現場修改＋拿件」，建議預留 1 小時。</li>
+            </ul>
+          </div>
         </div>
       </div>
 
-      <!-- Tab 4 -->
+      <!-- Tab 4: 拍攝服務 -->
       <div class="tab-content" id="tab4">
         <div class="qa-card">
-          <div class="card-header"><h2 class="card-title">👠 婚鞋需要準備嗎？</h2></div>
-          <div class="card-content"><ul><li>✅ 拍攝溝通時攝影師會建議。</li></ul></div>
+          <div class="card-header">
+            <h2 class="card-title"><span>👠</span>拍攝當天需要準備婚鞋嗎？顏色有建議嗎？</h2>
+          </div>
+          <div class="card-content">
+            <ul>
+              <li><span class="emoji">✅</span>此部分會在與攝影師進行拍攝溝通時一併討論。</li>
+              <li>攝影師會依拍攝場景、禮服風格，給予更合適的建議。</li>
+            </ul>
+          </div>
         </div>
 
         <div class="qa-card">
-          <div class="card-header"><h2 class="card-title">📸 親友能一起拍嗎？</h2></div>
-          <div class="card-content"><ul><li>✅ 親友可加入，但建議改為全家福方案較適合。</li></ul></div>
+          <div class="card-header">
+            <h2 class="card-title"><span>📸</span>親友可以一起入鏡拍攝嗎？</h2>
+          </div>
+          <div class="card-content">
+            <ul>
+              <li><span class="emoji">✅</span>若是婚紗拍攝方案，基本以新人拍攝為主。</li>
+              <li>若親友想一起入鏡，建議詢問門市，是否改為全家福／合照方案較為合適。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="qa-card">
+          <div class="card-header">
+            <h2 class="card-title"><span>🌧️</span>拍照當天遇到天氣不好可以延期嗎？</h2>
+          </div>
+          <div class="card-content">
+            <ul>
+              <li><span class="emoji">✅</span>若是天氣因素，我們完全配合延期。</li>
+              <li>但若為個人行程因素：第一次變更我們可協助。若第二次因私人因素改期，禮服將收取保留費。</li>
+            </ul>
+          </div>
         </div>
       </div>
 
     </div>
   </div>
 
+  <!-- JS -->
   <script>
     const navItems = document.querySelectorAll('.nav-item');
     const tabContents = document.querySelectorAll('.tab-content');
 
     navItems.forEach(item => {
       item.addEventListener('click', () => {
+        // 移除其他 active
         navItems.forEach(i => i.classList.remove('active'));
         tabContents.forEach(tab => tab.classList.remove('active'));
+
+        // 新增 active
         item.classList.add('active');
-        document.getElementById(item.dataset.tab).classList.add('active');
+        const tabId = item.getAttribute('data-tab');
+        document.getElementById(tabId).classList.add('active');
       });
     });
   </script>
-
 </body>
 </html>
+
