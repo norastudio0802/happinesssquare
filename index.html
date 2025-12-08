@@ -14,7 +14,7 @@
       padding: 0;
       font-family: 'Microsoft JhengHei', 'PingFang TC', 'Noto Sans TC', sans-serif;
       background: linear-gradient(135deg, #F5F0EB 0%, #E8E0D5 100%);
-      min-height: 100%;
+      min-height: auto; /* 🔥 修正：避免不能滑動 */
     }
 
     * { box-sizing: border-box; }
@@ -34,10 +34,9 @@
     .title-header {
       width: 100%;
       margin: 0;
-      padding: 32px 24px 32px 24px;
+      padding: 32px 24px;
       text-align: center;
       background: linear-gradient(135deg, #E8DDD0 0%, #D4C4B0 100%);
-      border-radius: 0;
     }
 
     .nav-content {
@@ -81,18 +80,16 @@
       padding-bottom: 60px;
     }
 
-    .page-title {
-      font-size: 32px;
-      font-weight: 700;
-      color: #6B5744;
-      margin: 0;
-      letter-spacing: 3px;
-    }
-
     .content-wrapper {
       max-width: 1000px;
       margin: 0 auto;
-      padding: 220px 24px 60px 24px;
+      padding: 160px 24px 60px 24px;  /* 🔥 修正：避免 QA 被 navbar 蓋住 */
+    }
+
+    @media (max-width: 768px) {
+      .content-wrapper {
+        padding: 140px 16px 48px 16px; /* 🔥 修正：手機版偏移量 */
+      }
     }
 
     .tab-content { display: none; }
@@ -113,10 +110,10 @@
       padding: 36px;
       margin-bottom: 28px;
       box-shadow: 0 6px 24px rgba(92, 74, 58, 0.12);
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       border: 2px solid transparent;
       position: relative;
       overflow: hidden;
+      transition: all 0.3s ease;
     }
 
     .qa-card:before {
@@ -142,7 +139,6 @@
       margin-bottom: 28px;
       padding-bottom: 24px;
       border-bottom: 2px solid #E8E0D5;
-      position: relative;
     }
 
     .card-title {
@@ -150,7 +146,6 @@
       font-weight: 600;
       color: #5C4A3A;
       margin: 0;
-      letter-spacing: 1px;
     }
 
     .card-content ul {
@@ -164,44 +159,6 @@
       color: #7A6651;
       font-size: 16px;
       line-height: 1.6;
-      position: relative;
-    }
-
-    @media (max-width: 768px) {
-      .title-header {
-        padding: 24px 16px 24px 16px;
-      }
-
-      .nav-content {
-        padding: 20px 16px 16px 16px;
-        gap: 6px;
-      }
-
-      .nav-item {
-        padding: 10px 16px;
-        font-size: 13px;
-      }
-
-      .page-title {
-        font-size: 24px;
-        letter-spacing: 2px;
-      }
-
-      .content-wrapper {
-        padding: 200px 16px 48px 16px;
-      }
-
-      .qa-card {
-        padding: 24px;
-      }
-
-      .card-title {
-        font-size: 20px;
-      }
-
-      .card-content li {
-        font-size: 15px;
-      }
     }
   </style>
 </head>
@@ -210,9 +167,7 @@
 
 <nav class="navbar">
   <div class="title-header">
-    <div class="title-card">
-      <h1 class="page-title" id="main-title">常見問題 Q&A</h1>
-    </div>
+    <h1 class="page-title" id="main-title">常見問題 Q&A</h1>
   </div>
 
   <div class="nav-content">
