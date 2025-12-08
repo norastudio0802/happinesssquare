@@ -1,23 +1,29 @@
 <!doctype html>
 <html lang="zh-TW">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
   <title>常見問題Q&A</title>
 
   <script src="https://cdn.tailwindcss.com"></script>
 
   <style>
-    body {
+    :root {
+      --nav-height: 160px; /* 保留一個變數用於計算偏移 (會動態以實際 navbar 高度為準) */
+    }
+
+    html, body {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
       font-family: 'Microsoft JhengHei', 'PingFang TC', 'Noto Sans TC', sans-serif;
       background: linear-gradient(135deg, #F5F0EB 0%, #E8E0D5 100%);
-      min-height: auto; /* 🔥 修正：避免不能滑動 */
+      min-height: auto;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
     }
 
-    * { box-sizing: border-box; }
+    *, *::before, *::after { box-sizing: border-box; }
 
     .navbar {
       position: fixed;
@@ -26,7 +32,7 @@
       width: 100%;
       background: rgba(245, 240, 235, 0.95);
       backdrop-filter: blur(10px);
-      box-shadow: 0 2px 20px rgba(139, 115, 85, 0.15);
+      box-shadow: 0 2px 20px rgba(139,115,85,0.15);
       z-index: 1000;
       padding: 0;
     }
@@ -34,9 +40,9 @@
     .title-header {
       width: 100%;
       margin: 0;
-      padding: 32px 24px;
+      padding: 28px 24px;
       text-align: center;
-      background: linear-gradient(135deg, #E8DDD0 0%, #D4C4B0 100%);
+      background: linear-gradient(135deg,#E8DDD0 0%, #D4C4B0 100%);
     }
 
     .nav-content {
@@ -45,270 +51,302 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 24px 24px 20px 24px;
+      padding: 16px 24px;
       gap: 8px;
       flex-wrap: wrap;
     }
 
     .nav-item {
-      padding: 12px 24px;
+      padding: 10px 20px;
       background: #E8DDD0;
       border: none;
       color: #6B5744;
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 500;
       cursor: pointer;
-      transition: all 0.3s ease;
-      border-radius: 24px;
+      border-radius: 20px;
       white-space: nowrap;
+      transition: transform .18s ease, background .18s ease;
     }
 
-    .nav-item:hover {
-      background: #D4C4B0;
-      color: #5C4A3A;
-      transform: translateY(-2px);
-    }
+    .nav-item:hover { transform: translateY(-2px); background:#D4C4B0; color:#5C4A3A; }
 
     .nav-item.active {
-      background: linear-gradient(135deg, #A0826D 0%, #8B6F47 100%);
-      color: #FFFFFF;
-      box-shadow: 0 4px 12px rgba(160, 130, 109, 0.4);
+      background: linear-gradient(135deg,#A0826D 0%, #8B6F47 100%);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(160,130,109,0.35);
     }
 
-    .main-app-container {
-      width: 100%;
-      padding-bottom: 60px;
+    .main-app-container { width: 100%; padding-bottom: 60px; }
+
+    .page-title {
+      font-size: 32px;
+      font-weight: 700;
+      color: #6B5744;
+      margin: 0;
+      letter-spacing: 3px;
     }
 
     .content-wrapper {
       max-width: 1000px;
       margin: 0 auto;
-      padding: 160px 24px 60px 24px;  /* 🔥 修正：避免 QA 被 navbar 蓋住 */
-    }
-
-    @media (max-width: 768px) {
-      .content-wrapper {
-        padding: 140px 16px 48px 16px; /* 🔥 修正：手機版偏移量 */
-      }
+      /* 預留給 fixed navbar 的高度 (會在載入時以實際 navbar 高度覆寫) */
+      padding: 160px 24px 60px 24px;
     }
 
     .tab-content { display: none; }
 
-    .tab-content.active {
-      display: block;
-      animation: fadeIn 0.5s ease;
-    }
+    .tab-content.active { display: block; animation: fadeIn .45s ease; }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+      from { opacity:0; transform: translateY(8px); }
+      to { opacity:1; transform: translateY(0); }
     }
 
     .qa-card {
-      background: #FFFFFF;
-      border-radius: 24px;
-      padding: 36px;
-      margin-bottom: 28px;
-      box-shadow: 0 6px 24px rgba(92, 74, 58, 0.12);
-      border: 2px solid transparent;
+      background: #fff;
+      border-radius: 16px;
+      padding: 18px 20px;
+      margin-bottom: 16px;
+      box-shadow: 0 3px 12px rgba(92,74,58,0.10);
       position: relative;
       overflow: hidden;
-      transition: all 0.3s ease;
+      transition: transform .22s ease, box-shadow .22s ease;
     }
 
     .qa-card:before {
-      content: '';
+      content: "";
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 4px;
-      background: linear-gradient(90deg, #A0826D 0%, #8B6F47 100%);
+      top: 0; left: 0; width: 100%; height: 4px;
+      background: linear-gradient(90deg,#A0826D 0%, #8B6F47 100%);
     }
 
-    .qa-card:hover {
-      box-shadow: 0 12px 40px rgba(92, 74, 58, 0.25);
-      transform: translateY(-4px);
-      border-color: #D4C4B0;
-    }
+    .qa-card:hover { transform: translateY(-4px); box-shadow: 0 8px 30px rgba(92,74,58,0.12); }
 
-    .card-header {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      margin-bottom: 28px;
-      padding-bottom: 24px;
-      border-bottom: 2px solid #E8E0D5;
-    }
+    .card-header { display:flex; align-items:center; gap:12px; margin-bottom:8px; padding-bottom:8px; border-bottom:1px solid #EFE6DB; }
 
-    .card-title {
-      font-size: 24px;
-      font-weight: 600;
-      color: #5C4A3A;
-      margin: 0;
-    }
+    .card-header h2 { margin:0; font-size:16.5px; font-weight:600; color:#5C4A3A; line-height:1.2; }
 
-    .card-content ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
+    .card-content ul { margin:8px 0 0 0; padding:0; list-style:none; }
 
-    .card-content li {
-      padding: 8px 0;
-      color: #7A6651;
-      font-size: 16px;
-      line-height: 1.6;
+    .card-content li { padding:4px 0; color:#7A6651; font-size:14px; line-height:1.55; }
+
+    /* small screens */
+    @media (max-width:768px) {
+      .title-header { padding:22px 16px; }
+      .nav-content { padding:12px 16px 14px 16px; gap:6px; }
+      .nav-item { padding:10px 14px; font-size:13px; }
+      .content-wrapper { padding: 140px 16px 40px 16px; }
+      .card-header h2 { font-size:15px; }
+      .card-content li { font-size:14px; }
     }
   </style>
 </head>
 
 <body>
+  <nav class="navbar" id="site-navbar">
+    <div class="title-header">
+      <div class="title-card"><h1 class="page-title">常見問題 Q&amp;A</h1></div>
+    </div>
 
-<nav class="navbar">
-  <div class="title-header">
-    <h1 class="page-title" id="main-title">常見問題 Q&A</h1>
-  </div>
+    <div class="nav-content" role="tablist" aria-label="FAQ 分類">
+      <button class="nav-item active" data-tab="tab1" role="tab" aria-selected="true">📅 預約試穿</button>
+      <button class="nav-item" data-tab="tab2" role="tab" aria-selected="false">👥 選擇人數與試穿方式</button>
+      <button class="nav-item" data-tab="tab3" role="tab" aria-selected="false">👗 禮服租借</button>
+      <button class="nav-item" data-tab="tab4" role="tab" aria-selected="false">📸 拍攝服務</button>
+    </div>
+  </nav>
 
-  <div class="nav-content">
-    <button class="nav-item active" data-tab="tab1" id="nav-1">📅 預約試穿</button>
-    <button class="nav-item" data-tab="tab2" id="nav-2">👥 選擇人數與試穿方式</button>
-    <button class="nav-item" data-tab="tab3" id="nav-3">👗 禮服租借</button>
-    <button class="nav-item" data-tab="tab4" id="nav-4">📸 拍攝服務</button>
-  </div>
-</nav>
+  <div class="main-app-container">
+    <div class="content-wrapper" id="content-wrapper">
 
-<script>
-  const navItems = document.querySelectorAll('.nav-item');
-  const tabContents = document.querySelectorAll('.tab-content');
+      <!-- Tab 1 -->
+      <div class="tab-content active" id="tab1" role="tabpanel">
+        <div class="qa-card">
+          <div class="card-header"><h2>📅 需要提前預約嗎？</h2></div>
+          <div class="card-content"><ul><li>✅ 是的，我們採「完全預約制」。建議您提前預約，以確保能安排到最適合的試穿時段。</li></ul></div>
+        </div>
 
-  navItems.forEach(btn => {
-    btn.addEventListener('click', () => {
-      navItems.forEach(i => i.classList.remove('active'));
-      tabContents.forEach(t => t.classList.remove('active'));
+        <div class="qa-card">
+          <div class="card-header"><h2>👗 初次試穿可以選幾套？</h2></div>
+          <div class="card-content"><ul><li>✅ 單租首次到店，我們提供免費試穿 2 套、體驗時長約 1 小時。如未租借且超出件數或時間，將酌收服務費。</li></ul></div>
+        </div>
 
-      btn.classList.add('active');
-      document.getElementById(btn.dataset.tab).classList.add('active');
-    });
-  });
-</script>
-
-</body>
-</html>
-
-
-<div class="main-app-container">
-  <div class="content-wrapper">
-
-    <!-- 🔹 Tab 1 -->
-    <div class="tab-content active" id="tab1">
-      <div class="qa-card">
-        <div class="card-header"><h2>📅 需要提前預約嗎？</h2></div>
-        <div class="card-content"><ul><li>✅ 是的，我們採「完全預約制」。建議您提前預約，以確保能安排到最適合的試穿時段。</li></ul></div>
-      </div>
-
-      <div class="qa-card">
-        <div class="card-header"><h2>👗 初次試穿可以選幾套？</h2></div>
-        <div class="card-content"><ul><li>✅ 單租首次到店，我們提供免費試穿 2 套、體驗時長約 1 小時。如未租借且超出件數或時間，將酌收服務費。</li></ul></div>
-      </div>
-
-      <div class="qa-card">
-        <div class="card-header"><h2>💍 婚紗包套新人可以先體驗試穿嗎？</h2></div>
-        <div class="card-content">
-          <ul>
-            <li>✅ 婚紗拍攝方案的新人：在未下訂、未與攝影師進行拍攝風格溝通前，暫無提供「提前體驗試穿」。</li>
-            <li>我們希望每件禮服在最好的狀態，提供給已確認拍攝流程的新人使用。</li>
-          </ul>
+        <div class="qa-card">
+          <div class="card-header"><h2>💍 婚紗包套新人可以先體驗試穿嗎？</h2></div>
+          <div class="card-content">
+            <ul>
+              <li>✅ 婚紗拍攝方案的新人：在未下訂、未與攝影師進行拍攝風格溝通前，暫無提供「提前體驗試穿」。</li>
+              <li>我們希望每件禮服在最好的狀態，提供給已確認拍攝流程的新人使用。</li>
+            </ul>
+          </div>
         </div>
       </div>
+
+      <!-- Tab 2 -->
+      <div class="tab-content" id="tab2" role="tabpanel" hidden>
+        <div class="qa-card">
+          <div class="card-header"><h2>👥 挑選禮服可以帶幾位親友？</h2></div>
+          <div class="card-content"><ul><li>✅ 因空間動線考量，包含新人最多 4 位入店。建議帶 1–2 位最了解您風格、能給予協助的親友，能讓挑選過程更順暢。</li></ul></div>
+        </div>
+
+        <div class="qa-card">
+          <div class="card-header"><h2>⏰ 挑禮限制時間與件數嗎？</h2></div>
+          <div class="card-content"><ul><li>✅ 試穿時間以 1–2 小時為主，依您想租的套數彈性調整。建議先了解自己喜歡的風格，縮小範圍會挑得更順利。</li></ul></div>
+        </div>
+      </div>
+
+      <!-- Tab 3 -->
+      <div class="tab-content" id="tab3" role="tabpanel" hidden>
+        <div class="qa-card">
+          <div class="card-header"><h2>💰 押金只能用現金嗎？</h2></div>
+          <div class="card-content"><ul><li>✅ 可使用現金或線上轉帳。若以轉帳方式退款，銀行會收 15 元手續費。若希望無手續費，建議以現金支付押金。</li></ul></div>
+        </div>
+
+        <div class="qa-card">
+          <div class="card-header"><h2>👰🏻‍♀️ 禮服尺寸可以修改嗎？</h2></div>
+          <div class="card-content"><ul><li>✅ 可以的，我們有專業修改服務。會依照您的身形微調至最適合的合身度。</li></ul></div>
+        </div>
+
+        <div class="qa-card">
+          <div class="card-header"><h2>📅 租期多長？</h2></div>
+          <div class="card-content"><ul><li>✅ 一般租期為 3 天 2 夜。跨縣市、外縣市或特殊需求可安排 4 天 3 夜。</li></ul></div>
+        </div>
+
+        <div class="qa-card">
+          <div class="card-header"><h2>👗 媽媽、伴娘、花童可以租一般禮服嗎？</h2></div>
+          <div class="card-content"><ul><li>✅ 建議以專用款式為主（媽媽禮服／伴娘服／花童服）。一般禮服多數有拖尾，活動上較不便利。</li></ul></div>
+        </div>
+
+        <div class="qa-card">
+          <div class="card-header"><h2>👛 禮服有提供披肩或配件嗎？</h2></div>
+          <div class="card-content"><ul><li>✅ 禮服有基本披肩可借用。若希望拍照更自然，建議自備氣質圍巾或披肩。</li></ul></div>
+        </div>
+
+        <div class="qa-card">
+          <div class="card-header"><h2>🧤 手套 / New Bra 有提供嗎？</h2></div>
+          <div class="card-content"><ul><li>✅ 手套目前無租借。</li><li>工作室有販售New Bra，「新人及造型師大大推薦好用」，可現場購買。</li></ul></div>
+        </div>
+
+        <div class="qa-card">
+          <div class="card-header"><h2>⌛ 取禮服會花很多時間嗎？</h2></div>
+          <div class="card-content"><ul><li>✅ 若只是領取禮服：約 15 分鐘。</li><li>若需當天「現場修改＋拿件」，建議預留 1 小時。</li></ul></div>
+        </div>
+      </div>
+
+      <!-- Tab 4 -->
+      <div class="tab-content" id="tab4" role="tabpanel" hidden>
+        <div class="qa-card">
+          <div class="card-header"><h2>👠 拍攝當天需要準備婚鞋嗎？顏色有建議嗎？</h2></div>
+          <div class="card-content"><ul><li>✅ 會在與攝影師拍攝溝通時一併討論，攝影師會給建議。</li></ul></div>
+        </div>
+
+        <div class="qa-card">
+          <div class="card-header"><h2>📸 親友可以一起入鏡拍攝嗎？</h2></div>
+          <div class="card-content"><ul><li>✅ 若是婚紗拍攝方案，基本以新人拍攝為主。若親友想入鏡，建議詢問門市是否改為全家福／合照方案較為合適。</li></ul></div>
+        </div>
+
+        <div class="qa-card">
+          <div class="card-header"><h2>🌧️ 拍照當天遇到天氣不好可以延期嗎？</h2></div>
+          <div class="card-content"><ul><li>✅ 若是天氣因素，我們完全配合延期。若為個人行程因素：第一次變更可協助，第二次改期則收保留費。</li></ul></div>
+        </div>
+      </div>
+
     </div>
-
-    <!-- 🔹 Tab 2 -->
-    <div class="tab-content" id="tab2">
-      <div class="qa-card">
-        <div class="card-header"><h2>👥 挑選禮服可以帶幾位親友？</h2></div>
-        <div class="card-content"><ul><li>✅ 因空間動線考量，包含新人最多 4 位入店。建議帶 1–2 位最了解您風格、能給予協助的親友，能讓挑選過程更順暢。</li></ul></div>
-      </div>
-
-      <div class="qa-card">
-        <div class="card-header"><h2>⏰ 挑禮限制時間與件數嗎？</h2></div>
-        <div class="card-content"><ul><li>✅ 試穿時間以 1–2 小時為主，依您想租的套數彈性調整。建議先了解自己喜歡的風格，縮小範圍會挑得更順利。</li></ul></div>
-      </div>
-    </div>
-
-    <!-- 🔹 Tab 3 -->
-    <div class="tab-content" id="tab3">
-      <div class="qa-card">
-        <div class="card-header"><h2>💰 押金只能用現金嗎？</h2></div>
-        <div class="card-content"><ul><li>✅ 可使用現金或線上轉帳。若以轉帳方式退款，銀行會收 15 元手續費。若希望無手續費，建議以現金支付押金。</li></ul></div>
-      </div>
-
-      <div class="qa-card">
-        <div class="card-header"><h2>👰🏻‍♀️ 禮服尺寸可以修改嗎？</h2></div>
-        <div class="card-content"><ul><li>✅ 可以的，我們有專業修改服務。會依照您的身形微調至最適合的合身度。</li></ul></div>
-      </div>
-
-      <div class="qa-card">
-        <div class="card-header"><h2>📅 租期多長？</h2></div>
-        <div class="card-content"><ul><li>✅ 一般租期為 3 天 2 夜。跨縣市、外縣市或特殊需求可安排 4 天 3 夜。</li></ul></div>
-      </div>
-
-      <div class="qa-card">
-        <div class="card-header"><h2>👗 媽媽、伴娘、花童可以租一般禮服嗎？</h2></div>
-        <div class="card-content"><ul><li>✅ 建議以專用款式為主（媽媽禮服／伴娘服／花童服）。一般禮服多數有拖尾，活動上較不便利。</li></ul></div>
-      </div>
-
-      <div class="qa-card">
-        <div class="card-header"><h2>👛 禮服有提供披肩或配件嗎？</h2></div>
-        <div class="card-content"><ul><li>✅ 禮服有基本披肩可借用。若希望拍照更自然，建議自備氣質圍巾或披肩。</li></ul></div>
-      </div>
-
-      <div class="qa-card">
-        <div class="card-header"><h2>🧤 手套 / New Bra 有提供嗎？</h2></div>
-        <div class="card-content"><ul><li>✅ 手套目前無租借。</li><li>工作室有販售New Bra，「新人及造型師大大推薦好用」，可現場購買。</li></ul></div>
-      </div>
-
-      <div class="qa-card">
-        <div class="card-header"><h2>⌛ 取禮服會花很多時間嗎？</h2></div>
-        <div class="card-content"><ul><li>✅ 若只是領取禮服：約 15 分鐘。</li><li>若需當天「現場修改＋拿件」，建議預留 1 小時。</li></ul></div>
-      </div>
-    </div>
-
-    <!-- 🔹 Tab 4 -->
-    <div class="tab-content" id="tab4">
-      <div class="qa-card">
-        <div class="card-header"><h2>👠 拍攝當天需要準備婚鞋嗎？顏色有建議嗎？</h2></div>
-        <div class="card-content"><ul><li>✅ 會在與攝影師拍攝溝通時一併討論，攝影師會給建議。</li></ul></div>
-      </div>
-
-      <div class="qa-card">
-        <div class="card-header"><h2>📸 親友可以一起入鏡拍攝嗎？</h2></div>
-        <div class="card-content"><ul><li>✅ 若是婚紗拍攝方案，基本以新人拍攝為主。若親友想入鏡，建議詢問門市是否改為全家福／合照方案較為合適。</li></ul></div>
-      </div>
-
-      <div class="qa-card">
-        <div class="card-header"><h2>🌧️ 拍照當天遇到天氣不好可以延期嗎？</h2></div>
-        <div class="card-content"><ul><li>✅ 若是天氣因素，我們完全配合延期。若為個人行程因素：第一次變更可協助，第二次改期則收保留費。</li></ul></div>
-      </div>
-    </div>
-
   </div>
-</div>
 
-<script>
-  const navItems = document.querySelectorAll('.nav-item');
-  const tabContents = document.querySelectorAll('.tab-content');
+  <script>
+    (function(){
+      const navItems = Array.from(document.querySelectorAll('.nav-item'));
+      const tabContents = Array.from(document.querySelectorAll('.tab-content'));
+      const navbar = document.getElementById('site-navbar');
+      const contentWrapper = document.getElementById('content-wrapper');
 
-  navItems.forEach(btn => {
-    btn.addEventListener('click', () => {
-      navItems.forEach(i => i.classList.remove('active'));
-      tabContents.forEach(t => t.classList.remove('active'));
+      // 設定 content-wrapper 的 padding-top 為 navbar 真實高度 + 16px 補償
+      function adjustContentOffset(){
+        const navRect = navbar.getBoundingClientRect();
+        const offset = Math.ceil(navRect.height) + 8;
+        contentWrapper.style.paddingTop = offset + 'px';
+      }
 
-      btn.classList.add('active');
-      document.getElementById(btn.dataset.tab).classList.add('active');
-    });
-  });
-</script>
+      // 初始調整（並監聽 resize）
+      adjustContentOffset();
+      window.addEventListener('resize', adjustContentOffset);
 
+      function activateTab(tabId, clickedBtn){
+        // 隱藏所有 tab
+        tabContents.forEach(tc => {
+          tc.classList.remove('active');
+          tc.setAttribute('hidden','');
+        });
+
+        // 取消其他按鈕 active 樣式
+        navItems.forEach(b => {
+          b.classList.remove('active');
+          b.setAttribute('aria-selected','false');
+        });
+
+        // 顯示目標 tab
+        const target = document.getElementById(tabId);
+        if(!target) return;
+
+        target.classList.add('active');
+        target.removeAttribute('hidden');
+
+        // 樣式與無障礙
+        if(clickedBtn){
+          clickedBtn.classList.add('active');
+          clickedBtn.setAttribute('aria-selected','true');
+        } else {
+          // find corresponding nav button
+          const btn = navItems.find(b => b.dataset.tab === tabId);
+          if(btn){ btn.classList.add('active'); btn.setAttribute('aria-selected','true'); }
+        }
+
+        // 平滑捲動到該 tab（補償 navbar 高度）
+        const rect = target.getBoundingClientRect();
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+        const navHeight = navbar.getBoundingClientRect().height;
+        const targetY = Math.max(0, scrollTop + rect.top - navHeight - 12); // -12px 餘白
+        window.scrollTo({ top: targetY, behavior: 'smooth' });
+      }
+
+      // 綁定按鈕事件
+      navItems.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const tabId = btn.getAttribute('data-tab');
+          activateTab(tabId, btn);
+          // optional: update URL hash without jumping
+          history.replaceState(null, '', '#' + tabId);
+        });
+      });
+
+      // 如果網址帶有 hash，載入時顯示對應 tab
+      window.addEventListener('load', () => {
+        const hash = (location.hash || '').replace('#','');
+        if(hash){
+          const exists = document.getElementById(hash);
+          if(exists){
+            activateTab(hash);
+            return;
+          }
+        }
+        // 預設顯示 tab1（若還沒顯示）
+        activateTab('tab1');
+      });
+
+      // accessibility: keyboard navigation (左右切換)
+      document.addEventListener('keydown', (e) => {
+        const activeIndex = navItems.findIndex(b => b.classList.contains('active'));
+        if(e.key === 'ArrowRight'){
+          const next = navItems[(activeIndex + 1) % navItems.length];
+          next && next.focus() && next.click();
+        } else if(e.key === 'ArrowLeft'){
+          const prev = navItems[(activeIndex - 1 + navItems.length) % navItems.length];
+          prev && prev.focus() && prev.click();
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
