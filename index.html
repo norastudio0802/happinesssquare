@@ -10,15 +10,13 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      overflow-x: hidden; /* 🔥 修正不能滑動 */
+      overflow-x: hidden;
       font-family: 'Microsoft JhengHei', 'PingFang TC', 'Noto Sans TC', sans-serif;
       background: linear-gradient(135deg, #F5F0EB 0%, #E8E0D5 100%);
       min-height: 100vh;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     /* Fixed Navigation */
     .navbar {
@@ -30,12 +28,10 @@
       backdrop-filter: blur(10px);
       box-shadow: 0 2px 20px rgba(139, 115, 85, 0.15);
       z-index: 1000;
-      padding: 0;
     }
 
     .title-header {
       width: 100%;
-      margin: 0;
       padding: 28px 24px;
       text-align: center;
       background: linear-gradient(135deg, #E8DDD0 0%, #D4C4B0 100%);
@@ -53,88 +49,74 @@
     }
 
     .nav-item {
-      padding: 12px 24px;
+      padding: 10px 20px;
       background: #E8DDD0;
       border: none;
       color: #6B5744;
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 500;
       cursor: pointer;
-      transition: all 0.3s ease;
-      border-radius: 24px;
+      border-radius: 20px;
       white-space: nowrap;
     }
 
     .nav-item.active {
       background: linear-gradient(135deg, #A0826D 0%, #8B6F47 100%);
       color: #FFFFFF;
-      box-shadow: 0 4px 12px rgba(160, 130, 109, 0.4);
     }
 
-    /* Main Content */
     .main-app-container {
       width: 100%;
-      padding-top: 180px; /* 🔥 原本 220px 造成巨大空白 → 依手機 UI 優化 */
+      padding-top: 155px; /* 🔥 減少空白 */
       padding-bottom: 60px;
     }
 
     .content-wrapper {
       max-width: 1000px;
       margin: 0 auto;
-      padding: 0 24px;
+      padding: 0 20px;
     }
 
-    /* Tab Content */
-    .tab-content {
-      display: none;
-    }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
 
-    .tab-content.active {
-      display: block;
-    }
-
-    /* Card Layout */
+    /* -------------------------
+       QA 卡片（縮回手機尺寸）
+       ------------------------- */
     .qa-card {
       background: #FFFFFF;
-      border-radius: 24px;
-      padding: 32px;
-      margin-bottom: 28px;
-      box-shadow: 0 6px 24px rgba(92, 74, 58, 0.12);
+      border-radius: 16px;
+      padding: 18px 20px;
+      margin-bottom: 16px;
+      box-shadow: 0 3px 12px rgba(92, 74, 58, 0.10);
     }
 
     .card-header h2 {
       margin: 0;
-      font-size: 22px;
+      font-size: 17px;
       font-weight: 600;
       color: #5C4A3A;
+      line-height: 1.35;
     }
 
     .card-content ul {
       padding-left: 0;
-      margin: 0;
+      margin: 10px 0 0 0;
       list-style: none;
     }
 
     .card-content li {
-      padding: 8px 0;
+      padding: 4px 0;
       color: #7A6651;
-      font-size: 16px;
-      line-height: 1.6;
+      font-size: 14px;
+      line-height: 1.55;
     }
 
     @media (max-width: 768px) {
-      .main-app-container {
-        padding-top: 160px; /* 🔥 符合手機 UI */
-      }
-      .qa-card {
-        padding: 24px;
-      }
-      .card-header h2 {
-        font-size: 18px;
-      }
-      .card-content li {
-        font-size: 15px;
-      }
+      .main-app-container { padding-top: 140px; }
+      .qa-card { padding: 16px 18px; }
+      .card-header h2 { font-size: 16px; }
+      .card-content li { font-size: 14px; }
     }
   </style>
  </head>
@@ -223,7 +205,7 @@
 
       <div class="qa-card">
         <div class="card-header"><h2>🧤 手套 / New Bra 有提供嗎？</h2></div>
-        <div class="card-content"><ul><li>✅ 手套目前無租借。</li><li>工作室有販售New Bra，可現場購買。</li></ul></div>
+        <div class="card-content"><ul><li>✅ 手套目前無租借。</li><li>工作室有販售New Bra，「新人及造型師大大推薦好用」，可現場購買。</li></ul></div>
       </div>
 
       <div class="qa-card">
