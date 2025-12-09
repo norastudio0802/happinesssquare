@@ -9,7 +9,7 @@
 
   <style>
     :root {
-      --nav-height: 160px; /* 保留一個變數用於計算偏移 (會動態以實際 navbar 高度為準) */
+      --nav-height: 160px;
     }
 
     html, body {
@@ -18,7 +18,6 @@
       padding: 0;
       font-family: 'Microsoft JhengHei', 'PingFang TC', 'Noto Sans TC', sans-serif;
       background: linear-gradient(135deg, #F5F0EB 0%, #E8E0D5 100%);
-      min-height: auto;
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
     }
@@ -70,7 +69,6 @@
     }
 
     .nav-item:hover { transform: translateY(-2px); background:#D4C4B0; color:#5C4A3A; }
-
     .nav-item.active {
       background: linear-gradient(135deg,#A0826D 0%, #8B6F47 100%);
       color: #fff;
@@ -90,12 +88,10 @@
     .content-wrapper {
       max-width: 1000px;
       margin: 0 auto;
-      /* 預留給 fixed navbar 的高度 (會在載入時以實際 navbar 高度覆寫) */
       padding: 160px 24px 60px 24px;
     }
 
     .tab-content { display: none; }
-
     .tab-content.active { display: block; animation: fadeIn .45s ease; }
 
     @keyframes fadeIn {
@@ -124,14 +120,10 @@
     .qa-card:hover { transform: translateY(-4px); box-shadow: 0 8px 30px rgba(92,74,58,0.12); }
 
     .card-header { display:flex; align-items:center; gap:12px; margin-bottom:8px; padding-bottom:8px; border-bottom:1px solid #EFE6DB; }
-
     .card-header h2 { margin:0; font-size:16.5px; font-weight:600; color:#5C4A3A; line-height:1.2; }
-
     .card-content ul { margin:8px 0 0 0; padding:0; list-style:none; }
-
     .card-content li { padding:4px 0; color:#7A6651; font-size:14px; line-height:1.55; }
 
-    /* small screens */
     @media (max-width:768px) {
       .title-header { padding:22px 16px; }
       .nav-content { padding:12px 16px 14px 16px; gap:6px; }
@@ -146,7 +138,7 @@
 <body>
   <nav class="navbar" id="site-navbar">
     <div class="title-header">
-      <div class="title-card"><h1 class="page-title">常見問題 Q&amp;A</h1></div>
+      <h1 class="page-title">常見問題 Q&amp;A</h1>
     </div>
 
     <div class="nav-content" role="tablist" aria-label="FAQ 分類">
@@ -234,49 +226,52 @@
         </div>
       </div>
 
-<!-- Tab 4 -->
-<div class="tab-content" id="tab4" role="tabpanel" hidden>
-  
-  <div class="qa-card">
-    <div class="card-header"><h2>👠 鞋子有建議準備什麼色系嗎？</h2></div>
-    <div class="card-content">
-      <ul>
-        <li>✅ 新娘們的婚鞋，我們很推薦金色或銀色這兩款經典色系，優雅百搭，不論禮服風格怎麼變都能完美融合。</li>
-        <li>新郎鞋則可以依照西裝顏色挑選，若不確定搭配，也歡迎在拍攝前，在群組裡面與攝影師討論，讓彼此的造型更一致、更有質感。</li>
-      </ul>
+      <!-- Tab 4 -->
+      <div class="tab-content" id="tab4" role="tabpanel" hidden>
+
+        <div class="qa-card">
+          <div class="card-header"><h2>👠 鞋子有建議準備什麼色系嗎？</h2></div>
+          <div class="card-content">
+            <ul>
+              <li>✅ 新娘們的婚鞋，我們很推薦金色或銀色這兩款經典色系，優雅百搭，不論禮服風格怎麼變都能完美融合。</li>
+              <li>新郎鞋則可以依照西裝顏色挑選，若不確定搭配，也歡迎在拍攝前，在群組裡面與攝影師討論，讓彼此的造型更一致、更有質感。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="qa-card">
+          <div class="card-header"><h2>📸 親友可以一起入鏡拍攝嗎？</h2></div>
+          <div class="card-content">
+            <ul>
+              <li>✅ 目前的拍攝方案主要以新人為主角，若親友也想一同入鏡，會變成當天拍攝流程會變成很趕喔。若想留下溫馨畫面，非常歡迎提前詢問工作室，看看是否有適合全家福方案，可以更順利完成拍攝。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="qa-card">
+          <div class="card-header"><h2>🌧️ 拍照當天遇到天氣不好可以延期嗎？</h2></div>
+          <div class="card-content">
+            <ul>
+              <li>✅ 若是天氣因素，我們完全配合延期。若為個人行程因素：第一次變更可協助，第二次改期則收保留費。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="qa-card">
+          <div class="card-header"><h2>🏖️ 可以到海邊拍攝嗎？</h2></div>
+          <div class="card-content">
+            <ul>
+              <li>✅ 可以的喔！只是可帶去海邊拍攝的禮服款式，需跟工作室在去確定是否能帶去拍攝。</li>
+              <li>通常海邊拍攝會有踏水或濕沙禮服部的橋段，因此我們會建議挑選輕盈、好活動的婚紗，避免厚重裙襬吸水後不易行動，也能降低安全上的風險。</li>
+              <li>若禮服當天需歸還，麻煩準備大型塑膠袋裝回，並稍作陰乾，讓禮服能保持最佳狀態回家。</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
     </div>
   </div>
-
-  <div class="qa-card">
-    <div class="card-header"><h2>📸 親友可以一起入鏡拍攝嗎？</h2></div>
-    <div class="card-content">
-      <ul>
-        <li>✅ 目前的拍攝方案主要以新人為主角，若親友也想一同入鏡，會變成當天拍攝流程會變成很趕喔。若想留下溫馨畫面，非常歡迎提前詢問工作室，看看是否有適合全家福方案，可以更順利完成拍攝。</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="qa-card">
-    <div class="card-header"><h2>🌧️ 拍照當天遇到天氣不好可以延期嗎？</h2></div>
-    <div class="card-content">
-      <ul>
-        <li>✅ 若是天氣因素，我們完全配合延期。若為個人行程因素：第一次變更可協助，第二次改期則收保留費。</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="qa-card">
-    <div class="card-header"><h2>🏖️ 可以到海邊拍攝嗎？</h2></div>
-    <div class="card-content">
-      <ul>
-        <li>✅ 可以的喔！只是可帶去海邊拍攝的禮服款式，需跟工作室在去確定是否能帶去拍攝。</li>
-        <li>通常海邊拍攝會有踏水或濕沙禮服部的橋段，因此我們會建議挑選輕盈、好活動的婚紗，避免厚重裙襬吸水後不易行動，也能降低安全上的風險。</li>
-        <li>若禮服當天需歸還，麻煩準備大型塑膠袋裝回，並稍作陰乾，讓禮服能保持最佳狀態回家。</li>
-      </ul>
-    </div>
-  </div>
-
-</div> 
 
   <script>
     (function(){
@@ -285,80 +280,63 @@
       const navbar = document.getElementById('site-navbar');
       const contentWrapper = document.getElementById('content-wrapper');
 
-      // 設定 content-wrapper 的 padding-top 為 navbar 真實高度 + 16px 補償
       function adjustContentOffset(){
-        const navRect = navbar.getBoundingClientRect();
-        const offset = Math.ceil(navRect.height) + 8;
+        const offset = navbar.getBoundingClientRect().height + 8;
         contentWrapper.style.paddingTop = offset + 'px';
       }
 
-      // 初始調整（並監聽 resize）
       adjustContentOffset();
       window.addEventListener('resize', adjustContentOffset);
 
       function activateTab(tabId, clickedBtn){
-        // 隱藏所有 tab
         tabContents.forEach(tc => {
           tc.classList.remove('active');
-          tc.setAttribute('hidden','');
+          tc.hidden = true;
         });
 
-        // 取消其他按鈕 active 樣式
         navItems.forEach(b => {
           b.classList.remove('active');
           b.setAttribute('aria-selected','false');
         });
 
-        // 顯示目標 tab
         const target = document.getElementById(tabId);
         if(!target) return;
 
         target.classList.add('active');
-        target.removeAttribute('hidden');
+        target.hidden = false;
 
-        // 樣式與無障礙
         if(clickedBtn){
           clickedBtn.classList.add('active');
           clickedBtn.setAttribute('aria-selected','true');
         } else {
-          // find corresponding nav button
           const btn = navItems.find(b => b.dataset.tab === tabId);
           if(btn){ btn.classList.add('active'); btn.setAttribute('aria-selected','true'); }
         }
 
-        // 平滑捲動到該 tab（補償 navbar 高度）
         const rect = target.getBoundingClientRect();
         const scrollTop = window.scrollY || document.documentElement.scrollTop;
         const navHeight = navbar.getBoundingClientRect().height;
-        const targetY = Math.max(0, scrollTop + rect.top - navHeight - 12); // -12px 餘白
+        const targetY = Math.max(0, scrollTop + rect.top - navHeight - 12);
         window.scrollTo({ top: targetY, behavior: 'smooth' });
       }
 
-      // 綁定按鈕事件
       navItems.forEach(btn => {
         btn.addEventListener('click', () => {
           const tabId = btn.getAttribute('data-tab');
           activateTab(tabId, btn);
-          // optional: update URL hash without jumping
           history.replaceState(null, '', '#' + tabId);
         });
       });
 
-      // 如果網址帶有 hash，載入時顯示對應 tab
       window.addEventListener('load', () => {
         const hash = (location.hash || '').replace('#','');
-        if(hash){
-          const exists = document.getElementById(hash);
-          if(exists){
-            activateTab(hash);
-            return;
-          }
+        if(hash && document.getElementById(hash)){
+          activateTab(hash);
+          return;
         }
-        // 預設顯示 tab1（若還沒顯示）
         activateTab('tab1');
       });
 
-      // accessibility: keyboard navigation (左右切換)
       document.addEventListener('keydown', (e) => {
         const activeIndex = navItems.findIndex(b => b.classList.contains('active'));
         if(e.key === 'ArrowRight'){
@@ -371,5 +349,7 @@
       });
     })();
   </script>
+
 </body>
 </html>
+
